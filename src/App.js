@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+// we have to manually import bootstrap css
+import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from "./Components/NavbarComponent";
+import { Container } from "react-bootstrap";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Store from "./Components/Store";
+import Success from "./Components/Success";
+import Cancel from "./Components/Cancel";
+import CartProvider from "./Components/CartContext";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <CartProvider>
+      <Container>
+        <NavbarComponent></NavbarComponent>
+        <BrowserRouter>
+          <Routes>
+            <Route index element={<Store />} />
+            <Route path="success" element={<Success />} />
+            <Route path="cancel" element={<Cancel />} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
+    </CartProvider>
+    </>
   );
 }
 
 export default App;
+/*
+a) index property tells us that the path is home page or path is /
+*/
